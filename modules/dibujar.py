@@ -1,7 +1,6 @@
 '''
 Modulo para dibujar todo lo que se ve en pantalla
 '''
-
 import os
 import pygame
 
@@ -34,41 +33,42 @@ class Draw:
         Cargo todas las imagenes necesarias para jugar
         '''
         root_code= os.path.dirname(os.path.abspath(__file__))  # Path del codigo
+        root_images = root_code + "/../Vainas_visuales/Buscaminas/"
 
-        self.imagen_casilla = pygame.image.load(root_code + "/../Vainas_visuales/Buscaminas/Fondo.png")  # Busco la imagen de fondo de casillas
+        self.imagen_casilla = pygame.image.load(root_images + '/Fondo.png')
         self.imagen_casilla = pygame.transform.scale(self.imagen_casilla, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_bandera = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Bandera1.png') # Busco la image
+        self.imagen_bandera = pygame.image.load(root_images+'/Bandera1.png')
         self.imagen_bandera = pygame.transform.scale(self.imagen_bandera, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_bomba = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Bomba.png')
+        self.imagen_bomba = pygame.image.load(root_images+'/Bomba.png')
         self.imagen_bomba = pygame.transform.scale(self.imagen_bomba, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_cero = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro0.png')
+        self.imagen_cero = pygame.image.load(root_images+'/Nro0.png')
         self.imagen_cero = pygame.transform.scale(self.imagen_cero, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_uno = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro1.png')
+        self.imagen_uno = pygame.image.load(root_images+'/Nro1.png')
         self.imagen_uno= pygame.transform.scale(self.imagen_uno, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_dos = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro2.png')
+        self.imagen_dos = pygame.image.load(root_images+'/Nro2.png')
         self.imagen_dos = pygame.transform.scale(self.imagen_dos, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_tres = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro3.png')
+        self.imagen_tres = pygame.image.load(root_images+'/Nro3.png')
         self.imagen_tres = pygame.transform.scale(self.imagen_tres, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_cuatro = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro4.png')
+        self.imagen_cuatro = pygame.image.load(root_images+'/Nro4.png')
         self.imagen_cuatro = pygame.transform.scale(self.imagen_cuatro, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_cinco = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro5.png')
+        self.imagen_cinco = pygame.image.load(root_images+'/Nro5.png')
         self.imagen_cinco = pygame.transform.scale(self.imagen_cinco, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_seis = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro6.png')
+        self.imagen_seis = pygame.image.load(root_images+'/Nro6.png')
         self.imagen_seis = pygame.transform.scale(self.imagen_seis, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_siete = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro7.png')
+        self.imagen_siete = pygame.image.load(root_images+'/Nro7.png')
         self.imagen_siete = pygame.transform.scale(self.imagen_siete, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
-        self.imagen_ocho = pygame.image.load(root_code+'/../Vainas_visuales/Buscaminas/Nro8.png')
+        self.imagen_ocho = pygame.image.load(root_images+'/Nro8.png')
         self.imagen_ocho = pygame.transform.scale(self.imagen_ocho, (self.tam_cuadros_pix,self.tam_cuadros_pix))
 
     def dibujar_cuadrados(self, ventana, tam_cuadros, rect_x, rect_y,RectL,Colores):

@@ -15,6 +15,7 @@ COLORES = {
     'Rojo' : np.array([255,0,0]), 'Gris' : np.array([131,131,131]), 'Verde' : np.array([5,250,6]),
     'Negro' : np.array([0,0,0]), 'Azul' : np.array([4,4,251]), 'Cian' : np.array([4,251,251])
     }
+
 #Dimensiones de la ventana del juego y su  deficion como pygame.display
 VENTANAX = 1024  # Dimensiones de la ventana en X
 VENTANAY = 768  # Dimensiones de la ventana en Y
@@ -26,9 +27,6 @@ LONGITUDRECT = VENTANAY - 100  # longuitud del cuadrado
 
 FLAGS = pygame.SHOWN | pygame.SCALED #| pygame.FULLSCREEN # Atributos especiales de la ventana :)
 
-
-
-
 def is_inside(pos_x, pos_y) -> bool:
     '''
     Esta dentro del cuadrado del juego?
@@ -36,12 +34,11 @@ def is_inside(pos_x, pos_y) -> bool:
     return pos_x > POSRECTX and pos_x < POSRECTX+LONGITUDRECT-5 and pos_y > 50 and pos_y < 50+LONGITUDRECT-5
 
 
-def buscaminas_j(ventana_juego):
+def buscaminas_j(ventana_juego, modo):
     '''
         funcion para iniciar a jugar el juego de buscaminas
     '''
     #Infomacion del buscaminas
-    modo = 1# Dioficultad del juego (solo 3 dificultades)
     obj_buscaminas = Buscaminas(modo)  # Objeto Buscaminas
     tablero = obj_buscaminas.generar_tabla() # Genero el mapa sobre el cual voy a jugar.
     cuadrados = obj_buscaminas.longitudes # Cantidad de cuadros actual :)
@@ -52,7 +49,7 @@ def buscaminas_j(ventana_juego):
     draw_obj.cargar_imagenes() # Cargo las imagenes con las que se jugara el buscaminas
     print(tablero)
     # definicion del color y el dibujo inicial
-    ventana_juego.fill(COLORES['Blanco'])   # Pinto el fondo de color Blanco
+    ventana_juego.fill(COLORES['Gris'])   # Pinto el fondo de color Blanco
     draw_obj.dibujar_cuadrados(ventana_juego, tam_cuadros, POSRECTX,POSRECTY,LONGITUDRECT,COLORES) # Dibujo las lineas del juego
     #Defino el reloj para la frecuencia del juego
     clock = pygame.time.Clock()
@@ -127,4 +124,4 @@ if __name__ == '__main__':
                                             FLAGS) # Ventana del juego
     pygame.display.set_caption("Mines")  # Cambio el nombre de la ventana
 
-    buscaminas_j(ventana)
+    buscaminas_j(ventana, 1)

@@ -55,14 +55,9 @@ class Buscaminas:
                     if columnas+1 < self.longitudes and matriz[filas][columnas+1] == 9: # Verifico a la derecha
                         matriz[filas][columnas] += 1
 
-                    if filas+1 < self.longitudes and columnas-1 >= 0 and matriz[filas+1][columnas-1] == 9:    #Verifico abajo a la izquierda
+                    if filas+1 < self.longitudes and columnas-1 >= 0 and matriz[filas+1][columnas-1] == 9:#Verifico abajo a la izquierda
                         matriz[filas][columnas] += 1
 
-                    if filas+1 < self.longitudes and matriz[filas+1][columnas] == 9:    # Verifico abajo
-                        matriz[filas][columnas] += 1
-
-                    if filas+1 < self.longitudes and columnas+1 < self.longitudes and matriz[filas+1][columnas+1] == 9: # Verifico abajo a la derecha
-                        matriz[filas][columnas] += 1
 
     def generar_minas(self,matriz,fila,columa):
         '''
@@ -83,6 +78,3 @@ class Buscaminas:
         define el tamaño en pixeles de las casillas
         '''
         self.tam_cuadros_pix = tam
-
-    
-    
