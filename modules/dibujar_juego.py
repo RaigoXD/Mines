@@ -7,8 +7,9 @@ import pygame
 class Draw:
     '''
     Clase draw para dibujar todo lo que se ve en pantalla
+    * tam_pixels: tamaño en pixeles de los cuadrados
+    * tam_tablero: tamaño del tablero actual
     '''
-
     # Variables para las imagenes que se cargan
     imagen_casilla = pygame.Surface
     imagen_bandera = pygame.Surface
@@ -26,7 +27,6 @@ class Draw:
     def __init__(self, tam_pixels, tam_tablero):
         self.tam_cuadros_pix = tam_pixels
         self.longitudes = tam_tablero
-
 
     def cargar_imagenes(self):  # Cargo las imagenes que utilizare a lo largo del juego
         '''
@@ -99,7 +99,7 @@ class Draw:
         * Colores: Dict Diccionario con los colores (Ya no se utiliza)
         * Fila: int Cordenadas en la matriz
         * Columna: int Cordenadas en la matriz
-        ''' 
+        '''
         if matriz[fila][columna] == 0:
             ventana.blit(self.imagen_cero, (rect_x+tam_cuadros*columna, rect_y+tam_cuadros*fila))
         elif matriz[fila][columna] == 1:
@@ -141,7 +141,7 @@ class Draw:
         pygame.font.init()
         estado = False  # Si pongo bandera o quito
         pos = 0   # Indice a eliminar
-        fuente = pygame.font.SysFont("Arial", 20, True).render("B",True,colores['Negro'])  # Creo una fuente
+        #fuente = pygame.font.SysFont("Arial", 20, True).render("B",True,colores['Negro'])  # Creo una fuente
 
         for index, elem in enumerate(banderas):
             if elem[0] == fila and elem[1] == columna:
@@ -220,4 +220,3 @@ class Draw:
             if matriz[fila+1][columna+1] == 0 and visited[fila+1][columna+1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
                 visited[fila][columna] = True #lo marco como visitado
                 self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna+1,visited)  # llamado recursivo para limpiar el nuevo 0
-        return None

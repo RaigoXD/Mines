@@ -1,9 +1,11 @@
 '''
     Modulo principal para el juego
 '''
+import os
 import pygame
 import numpy as np
-from modules.menu import *
+
+from modules.menu import main_menu
 from modules.mines import Buscaminas
 from modules.dibujar_juego import Draw
 
@@ -26,6 +28,10 @@ VENTANAY = 768  # Dimensiones de la ventana en Y
 POSRECTX = (VENTANAX/2 - (VENTANAY-100)/2) # Posicion en X del cuadrado
 POSRECTY = 50  # Posicion en Y del cuadrado
 LONGITUDRECT = VENTANAY - 100  # longuitud del cuadrado
+
+ROOTCODE= os.path.dirname(os.path.abspath(__file__))  # Path del codigo
+ROOTIMAGES = ROOTCODE + "/Vainas_visuales/icons"
+
 
 FLAGS = pygame.SHOWN | pygame.SCALED #| pygame.FULLSCREEN # Atributos especiales de la ventana :)
 
@@ -125,5 +131,10 @@ if __name__ == '__main__':
     ventana = pygame.display.set_mode((VENTANAX,VENTANAY),
                                             FLAGS) # Ventana del juego
     pygame.display.set_caption("Mines")  # Cambio el nombre de la ventana
-    main_menu(ventana, COLORES)
-    buscaminas_j(ventana, 1)
+    icon = pygame.image.load(ROOTIMAGES + '/explosion.png')
+    pygame.display.set_icon(icon)
+
+
+    dificultad = main_menu(ventana, COLORES)
+    if dificultad != 0:
+        buscaminas_j(ventana, dificultad)
