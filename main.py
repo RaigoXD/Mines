@@ -3,8 +3,9 @@
 '''
 import pygame
 import numpy as np
+from modules.menu import *
 from modules.mines import Buscaminas
-from modules.dibujar import Draw
+from modules.dibujar_juego import Draw
 
 pygame.init()
 pygame.font.init()
@@ -13,7 +14,8 @@ pygame.font.init()
 COLORES = {
     'Amarillo' : np.array([248,248,5]), 'Blanco' : np.array([255,255,255]), 'Rosado' : np.array([250,5,250]),
     'Rojo' : np.array([255,0,0]), 'Gris' : np.array([131,131,131]), 'Verde' : np.array([5,250,6]),
-    'Negro' : np.array([0,0,0]), 'Azul' : np.array([4,4,251]), 'Cian' : np.array([4,251,251])
+    'Negro' : np.array([0,0,0]), 'Azul' : np.array([4,4,251]), 'Cian' : np.array([4,251,251]),
+    'Beige' : np.array([255, 255, 221]), 'Azul2': np.array([120,194,194]), 'Verde2': np.array([183,191, 153])
     }
 
 #Dimensiones de la ventana del juego y su  deficion como pygame.display
@@ -49,7 +51,7 @@ def buscaminas_j(ventana_juego, modo):
     draw_obj.cargar_imagenes() # Cargo las imagenes con las que se jugara el buscaminas
     print(tablero)
     # definicion del color y el dibujo inicial
-    ventana_juego.fill(COLORES['Gris'])   # Pinto el fondo de color Blanco
+    ventana_juego.fill(COLORES['Beige'])   # Pinto el fondo de color Blanco
     draw_obj.dibujar_cuadrados(ventana_juego, tam_cuadros, POSRECTX,POSRECTY,LONGITUDRECT,COLORES) # Dibujo las lineas del juego
     #Defino el reloj para la frecuencia del juego
     clock = pygame.time.Clock()
@@ -123,5 +125,5 @@ if __name__ == '__main__':
     ventana = pygame.display.set_mode((VENTANAX,VENTANAY),
                                             FLAGS) # Ventana del juego
     pygame.display.set_caption("Mines")  # Cambio el nombre de la ventana
-
+    main_menu(ventana, COLORES)
     buscaminas_j(ventana, 1)

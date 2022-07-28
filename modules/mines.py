@@ -22,15 +22,12 @@ class Buscaminas:
             self.nro_minas = 70
 
 
-
     def generar_tabla(self):
         '''
         Genera el tablero del juego, sin minas
         '''
         matriz = np.zeros((self.longitudes,self.longitudes),dtype=int) # Defino el Tablero.
         return matriz
-        #print(Matriz)
-
 
     def contar_minas(self,matriz):
         '''
@@ -56,6 +53,12 @@ class Buscaminas:
                         matriz[filas][columnas] += 1
 
                     if filas+1 < self.longitudes and columnas-1 >= 0 and matriz[filas+1][columnas-1] == 9:#Verifico abajo a la izquierda
+                        matriz[filas][columnas] += 1
+
+                    if filas+1 < self.longitudes and matriz[filas+1][columnas] == 9:    # Verifico abajo
+                        matriz[filas][columnas] += 1
+
+                    if filas+1 < self.longitudes and columnas+1 < self.longitudes and matriz[filas+1][columnas+1] == 9: # Verifico abajo a la derecha
                         matriz[filas][columnas] += 1
 
 

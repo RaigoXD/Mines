@@ -81,7 +81,6 @@ class Draw:
         * RectL: int Tamaño del Rectangulo
         * Colores: Dict Diccionario con los colores
         '''
-
         # for i in range(self.Longitudes-1):  # Lineas Horizontales.
         #     #pygame.draw.rect(Ventana, Colores['Negro'], (RectX, RectY+(TamCuadros*(i+1)), RectL,4),border_radius=2)
         #     #pygame.draw.rect(Ventana, Colores['Negro'], (RectX+(TamCuadros*(i+1)), RectY, 4,RectL),border_radius=2)  # Antiguo codigo
