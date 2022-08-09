@@ -11,28 +11,28 @@ class Draw:
     * tam_tablero: tamaño del tablero actual
     '''
     # Variables para las imagenes que se cargan
-    imagen_casilla = pygame.Surface
-    imagen_bandera = pygame.Surface
-    imagen_bomba = pygame.Surface
-    imagen_cero = pygame.Surface
-    imagen_uno = pygame.Surface
-    imagen_dos = pygame.Surface
-    imagen_tres = pygame.Surface
-    imagen_cuatro = pygame.Surface
-    imagen_cinco = pygame.Surface
-    imagen_seis = pygame.Surface
-    imagen_siete = pygame.Surface
-    imagen_ocho = pygame.Surface
+    imagen_casilla: pygame.Surface
+    imagen_bandera: pygame.Surface
+    imagen_bomba: pygame.Surface
+    imagen_cero: pygame.Surface
+    imagen_uno: pygame.Surface
+    imagen_dos: pygame.Surface
+    imagen_tres: pygame.Surface
+    imagen_cuatro: pygame.Surface
+    imagen_cinco: pygame.Surface
+    imagen_seis: pygame.Surface
+    imagen_siete: pygame.Surface
+    imagen_ocho: pygame.Surface
 
     def __init__(self, tam_pixels, tam_tablero):
         self.tam_cuadros_pix = tam_pixels
         self.longitudes = tam_tablero
 
-    def cargar_imagenes(self):  # Cargo las imagenes que utilizare a lo largo del juego
+    def cargar_imagenes(self):    
         '''
         Cargo todas las imagenes necesarias para jugar
         '''
-        root_code= os.path.dirname(os.path.abspath(__file__))  # Path del codigo
+        root_code= os.path.dirname(os.path.abspath(__file__))    
         root_images = root_code + "/../Vainas_visuales/Buscaminas/"
 
         self.imagen_casilla = pygame.image.load(root_images + '/Fondo.png')
@@ -139,8 +139,8 @@ class Draw:
         * Columna: int Cordenadas en la matriz
         '''
         pygame.font.init()
-        estado = False  # Si pongo bandera o quito
-        pos = 0   # Indice a eliminar
+        estado = False    
+        pos = 0     
         #fuente = pygame.font.SysFont("Arial", 20, True).render("B",True,colores['Negro'])  # Creo una fuente
 
         for index, elem in enumerate(banderas):
@@ -153,11 +153,11 @@ class Draw:
             #pygame.draw.rect(Ventana, Colores['Rojo'],    # Pinto un bloque rojo para quitar banderas   <-  Antiguo codigo
             #                 ((RectX+TamCuadros*Columna)+4,(RectY+TamCuadros*Fila)+4, TamCuadros-4,TamCuadros-4)) 
             ventana.blit(self.imagen_casilla, (rect_x+tam_cuadros*columna, rect_y+tam_cuadros*fila))    
-            banderas.pop(pos)  # Elimino la bandera de la lista  
+            banderas.pop(pos)    
         else:
             #Antiguo codigo -> #Ventana.blit(Fuente, ((RectX+TamCuadros*Columna)+(TamCuadros/2),(RectY+TamCuadros*Fila)+(TamCuadros/2)-10))   # Muestra el valor almacenado en la posicion dicha en Matriz
             ventana.blit(self.imagen_bandera, (rect_x+tam_cuadros*columna, rect_y+tam_cuadros*fila))           
-            banderas.append([fila,columna])  # Agrago una vandera a la lista
+            banderas.append([fila,columna])    
 
 
     def verificar_zeros(self, ventana,matriz, tam_cuadros, rect_x, rect_y, colores, fila,columna,visited):
@@ -173,50 +173,50 @@ class Draw:
         * columna: int Cordenadas en la matriz
         * visited: np.array un array lleno de falses, aquivalente a la matriz tablero
         '''
-        if fila-1 >= 0 and columna-1 >= 0 and matriz[fila-1][columna-1] != 9:    #Verifico Arriba a la izquierda
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna-1) # DEscubro la ficha en esa posicion
-            if matriz[fila-1][columna-1] == 0 and not visited[fila-1][columna-1]:  # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna-1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if fila-1 >= 0 and columna-1 >= 0 and matriz[fila-1][columna-1] != 9:      
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna-1)   
+            if matriz[fila-1][columna-1] == 0 and not visited[fila-1][columna-1]:    
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna-1,visited)    
 
-        if fila-1 >= 0 and matriz[fila-1][columna] != 9:    # Verifico Arriba
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna) # DEscubro la ficha en esa posicion
-            if matriz[fila-1][columna] == 0 and not visited[fila-1][columna]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna,visited)   # llamado recursivo para limpiar el nuevo 0
+        if fila-1 >= 0 and matriz[fila-1][columna] != 9:      
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna)   
+            if matriz[fila-1][columna] == 0 and not visited[fila-1][columna]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna,visited)     
 
-        if fila-1 >= 0 and columna+1 < self.longitudes and matriz[fila-1][columna+1] != 9: # Verifico arriba a la derecha
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna+1) # DEscubro la ficha en esa posicion
-            if matriz[fila-1][columna+1] == 0 and not visited[fila-1][columna+1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna+1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if fila-1 >= 0 and columna+1 < self.longitudes and matriz[fila-1][columna+1] != 9:   
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila-1,columna+1)   
+            if matriz[fila-1][columna+1] == 0 and not visited[fila-1][columna+1]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila-1,columna+1,visited)    
 
-        if columna-1 >=0 and matriz[fila][columna-1] != 9:  #Verifico a la izquieda
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila,columna-1) # DEscubro la ficha en esa posicion
-            if matriz[fila][columna-1] == 0 and not visited[fila][columna-1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila,columna-1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if columna-1 >=0 and matriz[fila][columna-1] != 9:    
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila,columna-1)   
+            if matriz[fila][columna-1] == 0 and not visited[fila][columna-1]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila,columna-1,visited)    
 
-        if columna+1 < self.longitudes and matriz[fila][columna+1] != 9: # Verifico a la derecha
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila,columna+1) # DEscubro la ficha en esa posicion
-            if matriz[fila][columna+1] == 0 and not visited[fila][columna+1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila,columna+1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if columna+1 < self.longitudes and matriz[fila][columna+1] != 9:   
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila,columna+1)   
+            if matriz[fila][columna+1] == 0 and not visited[fila][columna+1]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila,columna+1,visited)    
 
-        if fila+1 < self.longitudes and columna-1 >= 0 and matriz[fila+1][columna-1] != 9:    #Verifico abajo a la izquierda
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna-1)  # DEscubro la ficha en esa posicion
-            if matriz[fila+1][columna-1] == 0 and not visited[fila+1][columna-1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna-1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if fila+1 < self.longitudes and columna-1 >= 0 and matriz[fila+1][columna-1] != 9:      
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna-1)    
+            if matriz[fila+1][columna-1] == 0 and not visited[fila+1][columna-1]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna-1,visited)    
 
-        if fila+1 < self.longitudes and matriz[fila+1][columna] != 9:    # Verifico abajo
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna) # DEscubro la ficha en esa posicion
-            if matriz[fila+1][columna] == 0 and not visited[fila+1][columna]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna,visited)  # llamado recursivo para limpiar el nuevo 0
+        if fila+1 < self.longitudes and matriz[fila+1][columna] != 9:      
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna)   
+            if matriz[fila+1][columna] == 0 and not visited[fila+1][columna]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna,visited)    
 
-        if fila+1 < self.longitudes and columna+1 < self.longitudes and matriz[fila+1][columna+1] != 9: # Verifico abajo a la derecha
-            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna+1) # DEscubro la ficha en esa posicion
-            if matriz[fila+1][columna+1] == 0 and visited[fila+1][columna+1]: # Si existe un 0 y no ha sido visitado entro a destapar sus casillas tambien
-                visited[fila][columna] = True #lo marco como visitado
-                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna+1,visited)  # llamado recursivo para limpiar el nuevo 0
+        if fila+1 < self.longitudes and columna+1 < self.longitudes and matriz[fila+1][columna+1] != 9:   
+            self.descubrir_ficha(ventana,matriz,tam_cuadros,rect_x,rect_y,colores,fila+1,columna+1)   
+            if matriz[fila+1][columna+1] == 0 and visited[fila+1][columna+1]:   
+                visited[fila][columna] = True   
+                self.verificar_zeros(ventana,matriz, tam_cuadros, rect_x, rect_y, colores,fila+1,columna+1,visited)
