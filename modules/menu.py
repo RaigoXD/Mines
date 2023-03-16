@@ -101,23 +101,27 @@ def main_menu(ventana: pygame.Surface, colores: dict) -> int:
     terminar = False
     option_selected_menu = 0
     while not terminar:
-
         for events in pygame.event.get():
+
             if events.type == pygame.QUIT:
                 terminar = True
             if events.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.mouse.get_pressed()[0]:
                     pos_click_x = pygame.mouse.get_pos()[0]
                     pos_click_y = pygame.mouse.get_pos()[1]
+                    print(f"(x= {pos_click_x}, y= {pos_click_y}")
+                
                     option_selected_menu = determinar_boton(pos_click_x, pos_click_y)
-                    if option_selected_menu == 1 or 2 or 3:
+                    print(option_selected_menu)
+                    print(option_selected_menu)
+                    if option_selected_menu in [1,2,3]:
+                        print(True)
                         terminar = True
                     elif option_selected_menu == 4:
                         print("creditos XD")
                     elif option_selected_menu == 5:
                         webbrowser.open("https://github.com/RaigoXD/Mines")
-                    else:
-                        print("nada")
+
 
         pygame.display.flip()
         clock.tick(60)

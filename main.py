@@ -8,6 +8,7 @@ import numpy as np
 from modules.menu import main_menu
 from modules.mines import Buscaminas
 from modules.dibujar_juego import Draw
+import time
 
 pygame.init()
 pygame.font.init()
@@ -183,6 +184,7 @@ def buscaminas_j(ventana_juego, modo):
 
         pygame.display.flip()
         clock.tick(60)
+    time.sleep(2)
 
 if __name__ == "__main__":
 
@@ -195,5 +197,6 @@ if __name__ == "__main__":
     pygame.display.set_icon(icon)
 
     dificultad = main_menu(ventana, COLORES)
+    print(dificultad)
     if dificultad != 0:
         buscaminas_j(ventana, dificultad)
